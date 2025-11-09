@@ -18,7 +18,7 @@ const constructorSlice = createSlice({
   reducers: {
     setBun: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
-        state.bun = action.payload
+        state.bun = action.payload;
       },
       prepare: (bun: TIngredient) => {
         const id = nanoid();
@@ -41,35 +41,29 @@ const constructorSlice = createSlice({
     },
     moveIngredientUp: (state, action: PayloadAction<number>) => {
       const currentIng = state.ingredients[action.payload];
-      const nextIng =
-        state.ingredients[action.payload - 1];
+      const nextIng = state.ingredients[action.payload - 1];
 
-      state.ingredients.splice(
-        action.payload - 1,
-        2,
-        currentIng,
-        nextIng
-      );
+      state.ingredients.splice(action.payload - 1, 2, currentIng, nextIng);
     },
     moveIngredientDown: (state, action: PayloadAction<number>) => {
       const currentIng = state.ingredients[action.payload];
-      const nextIng =
-        state.ingredients[action.payload + 1];
+      const nextIng = state.ingredients[action.payload + 1];
 
-      state.ingredients.splice(
-        action.payload,
-        2,
-        nextIng,
-        currentIng
-      );
-    },
+      state.ingredients.splice(action.payload, 2, nextIng, currentIng);
+    }
   }
 });
 
 export const getConstructorItems = (state: RootState) => state.constructor;
 export const getBun = (state: RootState) => state.burgerConstructor.bun;
-export const getIngredients = (state: RootState) => state.burgerConstructor.ingredients;
+export const getIngredients = (state: RootState) =>
+  state.burgerConstructor.ingredients;
 
-export const { setBun, addIngredient, removeIngredient, moveIngredientUp, moveIngredientDown } =
-  constructorSlice.actions;
+export const {
+  setBun,
+  addIngredient,
+  removeIngredient,
+  moveIngredientUp,
+  moveIngredientDown
+} = constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;

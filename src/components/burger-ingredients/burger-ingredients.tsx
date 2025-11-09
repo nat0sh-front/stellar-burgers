@@ -7,9 +7,7 @@ import { RootState, useDispatch, useSelector } from '../../services/store';
 import { getIngredientsThunk } from '../../services/slices/ingredientsSlice';
 
 export const BurgerIngredients: FC = () => {
-    const { ingredients } = useSelector(
-      (state: RootState) => state.ingredients
-    );
+  const { ingredients } = useSelector((state: RootState) => state.ingredients);
 
   const buns = useMemo(() => {
     const memoizedBuns = ingredients.filter(

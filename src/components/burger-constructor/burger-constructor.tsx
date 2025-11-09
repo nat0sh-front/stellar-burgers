@@ -2,20 +2,20 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { clearOrder, createOrder } from '../../services/slices/orderSlice';
+import { clearOrder, createOrderThunk } from '../../services/slices/orderSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
   const { bun, ingredients } = useSelector(
-      (state: RootState) => state.burgerConstructor
-    );
+    (state: RootState) => state.burgerConstructor
+  );
   const { order, isOrderLoading } = useSelector(
-      (state: RootState) => state.order
-  )
+    (state: RootState) => state.order
+  );
 
   const constructorItems = { bun, ingredients };
-  
+
   const orderRequest = isOrderLoading;
 
   const orderModalData = order;
@@ -25,11 +25,11 @@ export const BurgerConstructor: FC = () => {
 
     const ingredientIds = [
       constructorItems.bun._id,
-      ...constructorItems.ingredients.map(i => i._id),
+      ...constructorItems.ingredients.map((i) => i._id),
       constructorItems.bun._id
     ];
 
-    dispatch(createOrder(ingredientIds));
+    dispatch(createOrderThunk(ingredientIds));
   };
 
   const closeOrderModal = () => {

@@ -120,7 +120,7 @@ export const orderBurgerApi = (data: string[]) =>
   });
 
 type TOrderResponse = TServerResponse<{
-  orders: TOrder[];
+  order: TOrder;
 }>;
 
 export const getOrderByNumberApi = (number: number) =>

@@ -19,8 +19,8 @@ const initialState: TIngredientsState = {
   error: null
 };
 
-export const getIngredientsThunk = createAsyncThunk<TIngredient[]>(
-  'ingredients/fetchAll',
+export const getIngredientsThunk = createAsyncThunk(
+  'ingredients/all',
   async () => await getIngredientsApi()
 );
 
@@ -35,7 +35,7 @@ export const ingredientsSlice = createSlice({
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
         state.isIngredientsLoading = false;
-        state.error = action.error.message || null;
+        state.error = action.error.message || 'Ошибка загрузки ингредиентов';
       })
       .addCase(getIngredientsThunk.fulfilled, (state, action) => {
         state.isIngredientsLoading = false;
