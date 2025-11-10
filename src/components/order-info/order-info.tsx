@@ -3,8 +3,14 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
-import { getOrder, getOrderByNumberThunk } from '../../services/slices/orderSlice';
-import { getIngredients, getIngredientsThunk } from '../../services/slices/ingredientsSlice';
+import {
+  getOrder,
+  getOrderByNumberThunk
+} from '../../services/slices/orderSlice';
+import {
+  getIngredients,
+  getIngredientsThunk
+} from '../../services/slices/ingredientsSlice';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Modal } from '../modal';
 import { getOrders } from '../../services/slices/feedSlice';
@@ -15,16 +21,14 @@ export const OrderInfo: FC = () => {
   const { number } = useParams();
   const ingredients = useSelector(getIngredients);
   const orders = useSelector(getOrders);
-  const orderData = orders.find(
-    (order) => order.number === Number(number)
-  );
- 
+  const orderData = orders.find((order) => order.number === Number(number));
+
   useEffect(() => {
     dispatch(getIngredientsThunk());
     dispatch(getOrderByNumberThunk(Number(number)));
-  }, [dispatch])
+  }, [dispatch]);
 
-  console.log(orderData, ingredients)
+  console.log(orderData, ingredients);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

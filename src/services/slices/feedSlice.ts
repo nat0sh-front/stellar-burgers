@@ -2,14 +2,14 @@ import { getFeedsApi, getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrdersData } from '@utils-types';
 
-type TFeedState = {
+export type TFeedState = {
   feed: TOrdersData;
   isFeedLoading: boolean;
   error: string | null;
 };
 
 const initialState: TFeedState = {
-  feed: {orders: [], total: 0, totalToday: 0},
+  feed: { orders: [], total: 0, totalToday: 0 },
   isFeedLoading: false,
   error: null
 };
@@ -39,7 +39,7 @@ const feedSlice = createSlice({
       .addCase(getAllOrdersThunk.fulfilled, (state, action) => {
         state.isFeedLoading = false;
         state.feed = action.payload;
-      })
+      });
   }
 });
 

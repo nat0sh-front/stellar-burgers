@@ -20,6 +20,9 @@ export const Feed: FC = () => {
   const orders: TOrder[] = feed.orders;
 
   return (
-    <FeedUI orders={orders} handleGetFeeds={() => dispatch(getAllOrdersThunk())} />
+    <FeedUI
+      orders={orders}
+      handleGetFeeds={() => dispatch(getAllOrdersThunk())}
+    />
   );
 };

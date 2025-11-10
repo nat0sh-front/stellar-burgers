@@ -25,11 +25,8 @@ import { IngredientDetailsModal } from '../ingredient-details/ingredient-details
 
 const App = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const background = location.state?.background;
   const dispatch = useDispatch();
-  const { number } = useParams();
-  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getIngredientsThunk());
@@ -38,18 +35,10 @@ const App = () => {
     }
   }, []);
 
-  const handleClose = () => {
-    if (background) {
-      navigate(-1);
-    } else {
-      navigate('/feed');
-    }
-  }
-
   return (
 <div className={styles.app}>
       <AppHeader />
-            <Routes location={background || location}>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
@@ -58,7 +47,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <ProtectedRoute onlyAuth>
+            <ProtectedRoute>
               <Login />
             </ProtectedRoute>
           }
@@ -88,31 +77,14 @@ const App = () => {
           }
         />
 
-        {/* Защищенные маршруты, требующие авторизации */}
         <Route
           path='/profile'
-          element={
-            <ProtectedRoute onlyAuth>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/profile/orders'
-          element={
-            <ProtectedRoute onlyAuth>
-              <ProfileOrders />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/profile/orders/:number'
-          element={
-            <ProtectedRoute onlyAuth>
-              <OrderInfo />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route index element={<ProtectedRoute onlyAuth><Profile /></ProtectedRoute>} />
+          <Route path='orders' element={<ProtectedRoute onlyAuth><ProfileOrders /></ProtectedRoute>} />
+          <Route path='orders/:number' element={<ProtectedRoute onlyAuth><OrderInfo /></ProtectedRoute>} />
+        </Route>
+
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
