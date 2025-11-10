@@ -29,7 +29,7 @@ export const BurgerConstructor: FC = () => {
     if (!constructorItems.bun || orderRequest) return;
 
     if (!isAuth) {
-      navigate('/login', { replace: true });
+      navigate('/', { replace: true });
       return;
     }
 
@@ -39,8 +39,11 @@ export const BurgerConstructor: FC = () => {
       constructorItems.bun._id
     ];
 
-    dispatch(createOrderThunk(ingredientIds));
-    dispatch(clearConstructor());
+    dispatch(createOrderThunk(ingredientIds))
+    .unwrap() 
+    .then(() => {
+      dispatch(clearConstructor());
+    })
   };
 
   const closeOrderModal = () => {

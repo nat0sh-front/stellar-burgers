@@ -6,7 +6,6 @@ import {
   getUser,
   registerUserThunk
 } from '../../services/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
