@@ -6,6 +6,7 @@ import {
   getUser,
   registerUserThunk
 } from '../../services/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
@@ -13,11 +14,16 @@ export const Register: FC = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const error = useSelector(getError);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(registerUserThunk({ name: userName, email, password }));
+    dispatch(registerUserThunk({ name: userName, email, password }))
+    .unwrap() 
+      .then(() => {
+        navigate('/', { replace: true }); 
+      })
   };
 
   return (
