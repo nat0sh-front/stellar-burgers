@@ -1,21 +1,34 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useDispatch, useSelector } from '../../services/store';
+import {
+  getOrder,
+  getOrderByNumberThunk
+} from '../../services/slices/orderSlice';
+import {
+  getIngredients,
+  getIngredientsThunk
+} from '../../services/slices/ingredientsSlice';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Modal } from '../modal';
+import { getOrders } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const dispatch = useDispatch();
+  const { number } = useParams();
+  const ingredients = useSelector(getIngredients);
+  const orders = useSelector(getOrders);
+  const orderData = orders.find((order) => order.number === Number(number));
 
-  const ingredients: TIngredient[] = [];
+  useEffect(() => {
+    dispatch(getIngredientsThunk());
+    dispatch(getOrderByNumberThunk(Number(number)));
+  }, [dispatch]);
+
+  console.log(orderData, ingredients);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -64,4 +77,26 @@ export const OrderInfo: FC = () => {
   }
 
   return <OrderInfoUI orderInfo={orderInfo} />;
+};
+
+export const OrderInfoModal: FC = () => {
+  const { number } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const background = location.state?.background;
+
+  return (
+    <Modal
+      title={`#${number}`}
+      onClose={() => {
+        if (background) {
+          navigate(-1);
+        } else {
+          navigate('/feed');
+        }
+      }}
+    >
+      <OrderInfo />
+    </Modal>
+  );
 };
