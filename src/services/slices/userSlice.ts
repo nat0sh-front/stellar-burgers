@@ -167,4 +167,5 @@ const userSlice = createSlice({
 
 export const { getUser, getIsAuthenticated, getIsUserLoading, getError } =
   userSlice.selectors;
+export const { clearError } = userSlice.actions;
 export const userReducer = userSlice.reducer;

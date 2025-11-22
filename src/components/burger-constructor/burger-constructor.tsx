@@ -29,7 +29,7 @@ export const BurgerConstructor: FC = () => {
     if (!constructorItems.bun || orderRequest) return;
 
     if (!isAuth) {
-      navigate('/', { replace: true });
+      navigate('/login', { replace: true });
       return;
     }
 
