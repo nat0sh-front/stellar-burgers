@@ -1,14 +1,7 @@
-import { userReducer, getUserThunk, loginUserThunk, logoutUserThunk, updateUserThunk, clearError } from '../services/slices/userSlice';
+import { userReducer, getUserThunk, loginUserThunk, logoutUserThunk, updateUserThunk, clearError, initialState } from '../services/slices/userSlice';
 import { TUser } from '@utils-types';
 
 describe('Тест редюсер слайса Пользователя', () => {
-  const initialState = {
-    user: { name: '', email: '' },
-    isAuthenticated: false,
-    isUserLoading: false,
-    error: null
-  };
-
   const mockUser: TUser = {
     name: 'Test User',
     email: 'test@example.com'

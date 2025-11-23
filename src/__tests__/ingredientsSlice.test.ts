@@ -1,13 +1,8 @@
-import { ingredientsReducer, getIngredientsThunk } from '../services/slices/ingredientsSlice';
+import { ingredientsReducer, getIngredientsThunk, initialState } from '../services/slices/ingredientsSlice';
 import { TIngredient } from '@utils-types';
 import * as api from '@api';
 
 describe('Тест редюсер слайса Ингредиенты', () => {
-  const initialState = {
-    ingredients: [],
-    isIngredientsLoading: false,
-    error: null
-  };
 
   const mockIngredients: TIngredient[] = [
     {

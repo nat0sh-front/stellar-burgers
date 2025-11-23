@@ -1,13 +1,7 @@
-import { orderReducer, createOrderThunk, getOrderByNumberThunk, clearOrder } from '../services/slices/orderSlice';
+import { orderReducer, createOrderThunk, getOrderByNumberThunk, clearOrder, initialState } from '../services/slices/orderSlice';
 import { TOrder } from '@utils-types';
 
 describe('Тест редюсер слайса Заказ', () => {
-  const initialState = {
-    order: null,
-    isOrderLoading: false,
-    error: null
-  };
-
   const mockOrder: TOrder = {
     _id: 'order123',
     ingredients: ['1', '2'],

@@ -1,13 +1,7 @@
-import { userOrderReducer, getUserOrdersThunk, clearOrder } from '../services/slices/userOrderSlice';
+import { userOrderReducer, getUserOrdersThunk, clearOrder, initialState } from '../services/slices/userOrderSlice';
 import { TOrder } from '@utils-types';
 
 describe('Тест редюсер слайса Заказы пользователя', () => {
-  const initialState = {
-    orders: [],
-    isOrderLoading: false,
-    error: null
-  };
-
   const mockOrders: TOrder[] = [
     {
       _id: '1',

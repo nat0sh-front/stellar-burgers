@@ -1,16 +1,8 @@
 import { TIngredient } from '@utils-types';
+import { initialState } from '../services/slices/constructorSlice';
 import { constructorReducer, addIngredient, removeIngredient, moveIngredientUp, moveIngredientDown, clearConstructor, setBun } from '../services/slices/constructorSlice';
 
 describe('Тест редюсер слайса Конструктора', () => {
-    const initialState = {
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    },
-    isIngredientsLoading: false,
-    error: null
-  };
-
   const mockBun: TIngredient = {
   "_id": "bun123",
   "name": "Test Bun",
@@ -41,16 +33,16 @@ const mockIngredient: TIngredient = {
 
   test('Инициализация начального значения', () => {
     const state = constructorReducer(undefined, { type: 'UNKNOWN_ACTION' });
-    expect(state).toEqual({ bun: null, ingredients: [] });
+    expect(state).toEqual(initialState);
   });
 
   test('Добавление булки', () => {
-    const newState = constructorReducer({ bun: null, ingredients: [] }, setBun(mockBun));
+    const newState = constructorReducer(initialState, setBun(mockBun));
     expect(newState.bun).toMatchObject(mockBun);
   });
 
   test('Добавление ингредиента', () => {
-    const newState = constructorReducer({ bun: null, ingredients: [] }, addIngredient(mockIngredient));
+    const newState = constructorReducer(initialState, addIngredient(mockIngredient));
     expect(newState.ingredients).toHaveLength(1);
     expect(newState.ingredients[0]).toMatchObject(mockIngredient);
   });

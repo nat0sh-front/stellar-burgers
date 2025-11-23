@@ -20,7 +20,7 @@ type TUserState = {
 
 type TError = string;
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   user: { name: '', email: '' },
   isAuthenticated: false,
   isUserLoading: false,

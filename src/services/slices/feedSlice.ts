@@ -8,7 +8,7 @@ export type TFeedState = {
   error: string | null;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   feed: { orders: [], total: 0, totalToday: 0 },
   isFeedLoading: false,
   error: null

@@ -1,12 +1,7 @@
-import { feedReducer, getAllOrdersThunk } from '../services/slices/feedSlice';
+import { feedReducer, getAllOrdersThunk, initialState } from '../services/slices/feedSlice';
 import { TOrdersData } from '@utils-types';
 
 describe('Тест редюсер слайса Лента', () => {
-  const initialState = {
-    feed: { orders: [], total: 0, totalToday: 0 },
-    isFeedLoading: false,
-    error: null
-  };
 
   const mockFeed: TOrdersData = {
     orders: [
