@@ -20,7 +20,7 @@ type TUserState = {
 
 type TError = string;
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   user: { name: '', email: '' },
   isAuthenticated: false,
   isUserLoading: false,
@@ -167,4 +167,5 @@ const userSlice = createSlice({
 
 export const { getUser, getIsAuthenticated, getIsUserLoading, getError } =
   userSlice.selectors;
+export const { clearError } = userSlice.actions;
 export const userReducer = userSlice.reducer;
